@@ -1,5 +1,5 @@
 package com.gradingapp.model;
-import java.util.Date;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,11 +8,36 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Homework {
 	
 	@Id
-	public ObjectId _id;
-	String homeworkName;
-	Date dueDate;
-	Question[] question;
+	private ObjectId _id;
+	private String homeworkName;
+	private String dueDate;
+	private Problem[] problems;
 	
+	public ObjectId get_id() {
+		return _id;
+	}
+	public void set_id(ObjectId _id) {
+		this._id = _id;
+	}
 	
-
+	public String getHomeworkName() {
+		return homeworkName;
+	}
+	public void setHomeworkName(String homeworkName) {
+		this.homeworkName = homeworkName;
+	}
+	
+	public String getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
+	}
+	
+	public Problem[] getProblems() {
+		return problems;
+	}
+	public void setProblems(Problem[] problems) {
+		this.problems = problems;
+	}
 }
