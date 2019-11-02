@@ -2,6 +2,7 @@
 node_modules/
 someOtherfoler/
 target/
+bin/
 
 # Compiled source #
 ###################
@@ -11,7 +12,7 @@ target/
 *.exe
 *.o
 *.so
-
+*.project
 *.so
 
 # Packages #
