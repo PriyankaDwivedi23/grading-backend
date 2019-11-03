@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileService {
 	
 	
-private static final String folderPath = "/Users/bebo/Documents/grading-backend/src/main/resources/uploads/";
+private static final String folderPath = "/Users/sonal/Documents/grading-backend/src/main/resources/uploads/";
     
     public ResponseEntity  handleFileUpload(MultipartFile file, String Type , String homeworkName, String questionName, String userName) {
         try {
