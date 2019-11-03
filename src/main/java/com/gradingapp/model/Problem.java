@@ -1,14 +1,28 @@
 package com.gradingapp.model;
 
+import org.springframework.web.multipart.MultipartFile;
 
 public class Problem {
 	
 	private String problemName;
 	private String problemDescription;
-//	private Integer testCaseNum;
-	private Test[] t;
-
+	private MultipartFile inputFile;
+	private MultipartFile outputFile;
+	private String homeworkName;
 	
+	public MultipartFile getInputFile() {
+		return inputFile;
+	}
+	public void setInputFile(MultipartFile inputFile) {
+		this.inputFile = inputFile;
+	}
+	public MultipartFile getOutputFile() {
+		return outputFile;
+	}
+	public void setOutputFile(MultipartFile outputFile) {
+		this.outputFile = outputFile;
+	}
+
 	public String getProblemName() {
 		return problemName;
 	}
@@ -21,19 +35,11 @@ public class Problem {
 	public void setProblemDescription(String problemDescription) {
 		this.problemDescription = problemDescription;
 	}
-//	public Integer getTestCaseNum() {
-//		return testCaseNum;
-//	}
-//	public void setTestCaseNum(Integer testCaseNum) {
-//		this.testCaseNum = testCaseNum;
-//	}
-	
-	
-	public Test[] getT() {
-		return t;
+	public String getHomeworkName() {
+		return homeworkName;
 	}
-	public void setT(Test[] t) {
-		this.t = t;
+	public void setHomeworkName(String homeworkName) {
+		this.homeworkName = homeworkName;
 	}
 
 }

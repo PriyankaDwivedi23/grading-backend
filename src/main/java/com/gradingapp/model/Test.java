@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
 @Document
 public class Test {
+	
+	public Test() {}
 
 	MultipartFile inputFile;
 	MultipartFile outputFile;

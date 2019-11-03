@@ -1,14 +1,18 @@
 package com.gradingapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gradingapp.model.Homework;
 import com.gradingapp.model.Problem;
-import com.gradingapp.model.Test;
 import com.gradingapp.repository.HomeworkRepository;
 
 @Service
@@ -17,28 +21,25 @@ public class HomeworkService {
 	@Autowired
 	private HomeworkRepository homeworkRepository;
 	private FileService fileService;
-	
-
-	public void create(Homework homework) {
+		public void create(Homework homework) {
 		String homeworkName = homework.getHomeworkName();
-		System.out.println("HW name: " + homeworkName);
-		System.out.println("HW name: " + homework.getDueDate());
-		List<Problem> problems = homework.getProblems();
-		System.out.println("Problems: " + problems);
-		for(Problem problem: problems) {
-			String problemName = problem.getProblemName();
-			System.out.println("Problem name: " + problemName);
-			System.out.println("Problem des: " + problem.getProblemDescription());
-		
-			Test[] t  = problem.getT();
-			for(Test t1: t) {
-				MultipartFile inputFiles = t1.getInputFile();
-				System.out.println("Input File: " + inputFiles.getOriginalFilename());
-				MultipartFile outputFiles = t1.getOutputFile();
-				System.out.println("Output File: " + outputFiles.getOriginalFilename());
-			}
-//			
-		}
-//		homeworkRepository.save(homework);
+		String dueDate = homework.getDueDate();
+		List<Problem> problems = new ArrayList<>(); 
+		homework.setProblem(problems);
+		homeworkRepository.save(homework);
+	}
+	
+	public void upload(Problem problem) {
+		String problemName = problem.getProblemName();
+		String problemDesc = problem.getProblemDescription();
+		MultipartFile inputFile = problem.getInputFile();
+		MultipartFile outputFile = problem.getOutputFile();
+		System.out.println(problemName);
+		Homework homework1 = homeworkRepository.findByHomeworkName(problem.getHomeworkName());
+		System.out.println(homework1.getProblem());
+		homework1.getProblem().add(problem);
+		System.out.println(homework1.getProblem());
+		homeworkRepository.updateProblem(problem);
+//		homeworkRepository.save(homework1);
 	}
 }
