@@ -9,6 +9,7 @@ public class Test {
 
 	MultipartFile inputFile;
 	MultipartFile outputFile;
+	
 	public MultipartFile getInputFile() {
 		return inputFile;
 	}

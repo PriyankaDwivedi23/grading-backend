@@ -5,7 +5,7 @@ public class Problem {
 	
 	private String problemName;
 	private String problemDescription;
-	private Integer testCaseNum;
+//	private Integer testCaseNum;
 	private Test[] t;
 
 	
@@ -21,12 +21,12 @@ public class Problem {
 	public void setProblemDescription(String problemDescription) {
 		this.problemDescription = problemDescription;
 	}
-	public Integer getTestCaseNum() {
-		return testCaseNum;
-	}
-	public void setTestCaseNum(Integer testCaseNum) {
-		this.testCaseNum = testCaseNum;
-	}
+//	public Integer getTestCaseNum() {
+//		return testCaseNum;
+//	}
+//	public void setTestCaseNum(Integer testCaseNum) {
+//		this.testCaseNum = testCaseNum;
+//	}
 	
 	
 	public Test[] getT() {

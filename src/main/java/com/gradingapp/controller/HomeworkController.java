@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gradingapp.model.Homework;
 import com.gradingapp.service.HomeworkService;
 
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin("*")
 @RestController
 public class HomeworkController {
 	
@@ -29,7 +29,7 @@ public class HomeworkController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeworkController.class);
 	
 	@CrossOrigin
-	@PostMapping("/create")
+	@PostMapping(value = "/create" , consumes = {"multipart/form-data"})
 	public ResponseEntity create(@ModelAttribute Homework homework) {
 		System.out.println("Inside Homework controller");
 		homeworkService.create(homework);
