@@ -1,13 +1,13 @@
 package com.gradingapp.model;
 
-import com.gradingapp.model.Testcase;
 
 public class Problem {
 	
 	private String problemName;
 	private String problemDescription;
 	private Integer testCaseNum;
-	private Testcase[] testCases;
+	private Test[] t;
+
 	
 	public String getProblemName() {
 		return problemName;
@@ -28,10 +28,12 @@ public class Problem {
 		this.testCaseNum = testCaseNum;
 	}
 	
-	public Testcase[] getTestcases() {
-		return testCases;
+	
+	public Test[] getT() {
+		return t;
 	}
-	public void setTestcases(Testcase[] testcases) {
-		this.testCases = testcases;
+	public void setT(Test[] t) {
+		this.t = t;
 	}
+
 }

@@ -8,17 +8,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Homework {
 	
 	@Id
-	private ObjectId _id;
+//	private ObjectId _id;
 	private String homeworkName;
 	private String dueDate;
 	private Problem[] problems;
 	
-	public ObjectId get_id() {
-		return _id;
-	}
-	public void set_id(ObjectId _id) {
-		this._id = _id;
-	}
+//	public ObjectId get_id() {
+//		return _id;
+//	}
+//	public void set_id(ObjectId _id) {
+//		this._id = _id;
+//	}
 	
 	public String getHomeworkName() {
 		return homeworkName;
