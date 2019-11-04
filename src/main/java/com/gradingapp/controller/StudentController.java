@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.gradingapp.model.StudentHomework;
 import com.gradingapp.service.StudentService;
 
@@ -16,9 +18,9 @@ public class StudentController {
 	
 	
 	@PostMapping("/submitHomework")
-	public ResponseEntity submitHomework(@ModelAttribute StudentHomework studentHomework) {
+	public ResponseEntity submitHomework(MultipartFile sourceCode, StudentHomework studentHomework) {
 		
-		studentService.submitHomework(studentHomework);
+		studentService.submitHomework(sourceCode, studentHomework);
 		
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 	}

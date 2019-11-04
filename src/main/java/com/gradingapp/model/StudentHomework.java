@@ -10,7 +10,6 @@ public class StudentHomework {
 	String userName;
 	String homeworkName;
 	String questionName;
-	MultipartFile[] sourceCode;
 	
 	public StudentHomework(String userName, String homeworkName, String questionName) {
 		this.userName = userName;
@@ -34,12 +33,6 @@ public class StudentHomework {
 	}
 	public void setQuestionName(String questionName) {
 		this.questionName = questionName;
-	}
-	public MultipartFile[] getSourceCode() {
-		return sourceCode;
-	}
-	public void setSourceCode(MultipartFile[] sourceCode) {
-		this.sourceCode = sourceCode;
 	}
 
 }
