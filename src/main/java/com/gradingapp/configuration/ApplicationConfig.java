@@ -19,7 +19,7 @@ public class ApplicationConfig {
     public MongoDbFactory mongoDbFactory() throws Exception {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
 //        UserCredentials userCredentials = new UserCredentials("", "");
-        return new SimpleMongoDbFactory(mongoClient, "homework-db" );
+        return new SimpleMongoDbFactory(mongoClient, "grading-app" );
     }
  
     @Bean

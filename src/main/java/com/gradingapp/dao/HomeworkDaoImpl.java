@@ -21,7 +21,7 @@ public class HomeworkDaoImpl implements HomeworkDao{
 	@Autowired
     MongoTemplate mongoTemplate;
  
-    final String COLLECTION = "homeworks";
+    final String COLLECTION = "homework";
 
 	@Override
 	public void create(Homework h) {
