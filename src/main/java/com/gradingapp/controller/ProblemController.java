@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gradingapp.model.Problem;
-import com.gradingapp.service.FileService;
 import com.gradingapp.service.ProblemService;
 
 @CrossOrigin("*")
@@ -23,7 +22,7 @@ public class ProblemController {
 	@PostMapping(value = "/upload")
 	public ResponseEntity upload(MultipartFile inputFile, MultipartFile outputFile, Problem problem) {
 		
-		System.out.print(problem.getHomeworkName()+   "    " + problem.getProblemName() + "    "+  problem.getProblemDescription());
+		System.out.println(problem.getHomeworkName()+   "    " + problem.getProblemName() + "    "+  problem.getProblemDescription());
 		
 		problemService.upload(inputFile, outputFile, new Problem(problem.getProblemName(), problem.getProblemDescription(),problem.getHomeworkName()));
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
