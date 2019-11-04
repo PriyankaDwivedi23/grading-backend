@@ -1,11 +1,11 @@
-package com.gradingapp.service;
+package com.gradingapp.dao;
 
 import java.util.List;
 
 import com.gradingapp.bean.Homework;
 import com.gradingapp.bean.Problem;
 
-public interface HomeworkService {
+public interface HomeworkDao {
 	
 	public void create(Homework h);
 	 

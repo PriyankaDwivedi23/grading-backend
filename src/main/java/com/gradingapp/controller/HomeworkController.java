@@ -1,8 +1,7 @@
 package com.gradingapp.controller;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,10 +10,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.gradingapp.model.Homework;
-import com.gradingapp.service.FileService;
 import com.gradingapp.service.HomeworkService;
+import com.gradingapp.bean.Problem;
+import com.gradingapp.bean.Homework;
 
 
 @CrossOrigin("*")
@@ -22,17 +22,22 @@ import com.gradingapp.service.HomeworkService;
 public class HomeworkController {
 	
 	@Autowired
-	private HomeworkService homeworkService;
-	private FileService fileService;
+	HomeworkService homeworkService;
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeworkController.class);
-	
-	@CrossOrigin
+    @CrossOrigin
 	@PostMapping(value = "/create" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity create(@ModelAttribute Homework homework) {
+	public ResponseEntity create(@ModelAttribute Homework homework) {       
 		homeworkService.create(homework);
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 	}
-	
-	
+    
+    @CrossOrigin
+	@PostMapping(value = "/upload")
+	public ResponseEntity upload(MultipartFile inputFile, MultipartFile outputFile, Problem problem) {
+		
+		System.out.println(problem.getHomeworkName()+   "    " + problem.getProblemName() + "    "+  problem.getProblemDescription());
+		
+		homeworkService.updateProblem(new Problem(problem.getProblemName(), problem.getProblemDescription(),problem.getHomeworkName()));
+		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
+	}
 }
