@@ -13,18 +13,5 @@ import com.gradingapp.model.Problem;
 
 @Repository
 public interface HomeworkRepository extends MongoRepository<Homework, String> {
-	public static final MongoTemplate mongoTemplate = null;
-
-    
-    public default void updateProblem(Problem h) {
-
-    	Update update = new Update();
-    	update.addToSet("problems", h);
-    	Criteria criteria = Criteria.where("homeworkName").is(h.getHomeworkName());
-//    	MongoTemplate mongoTemplate = new MongoTemplate();
-    	mongoTemplate.updateFirst(Query.query(criteria), update, "grading-app.homework");
-    }
-
-	public Homework findByHomeworkName(String homeworkName);
-
+	
 }

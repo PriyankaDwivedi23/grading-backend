@@ -1,26 +1,20 @@
 package com.gradingapp.model;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
 
+@Document
 public class Problem {
 	
 	private String problemName;
 	private String problemDescription;
-	private MultipartFile inputFile;
-	private MultipartFile outputFile;
 	private String homeworkName;
 	
-	public MultipartFile getInputFile() {
-		return inputFile;
-	}
-	public void setInputFile(MultipartFile inputFile) {
-		this.inputFile = inputFile;
-	}
-	public MultipartFile getOutputFile() {
-		return outputFile;
-	}
-	public void setOutputFile(MultipartFile outputFile) {
-		this.outputFile = outputFile;
+	public Problem(String problemName, String problemDescription, String homeworkName ) {
+		this.problemName = problemName;
+		this.problemDescription = problemDescription;
+		this.homeworkName = homeworkName;
+		
 	}
 
 	public String getProblemName() {

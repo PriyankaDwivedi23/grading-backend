@@ -1,6 +1,8 @@
 package com.gradingapp.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gradingapp.model.Homework;
 import com.gradingapp.model.Problem;
+import com.gradingapp.service.FileService;
 import com.gradingapp.service.HomeworkService;
 
 
@@ -23,6 +27,7 @@ public class HomeworkController {
 	
 	@Autowired
 	private HomeworkService homeworkService;
+	private FileService fileService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeworkController.class);
 	
@@ -33,10 +38,5 @@ public class HomeworkController {
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 	}
 	
-	@CrossOrigin
-	@PostMapping(value = "/upload" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity upload(@ModelAttribute Problem problem) {
-		homeworkService.upload(problem);
-		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
-	} 
+	
 }
