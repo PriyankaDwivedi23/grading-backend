@@ -1,8 +1,6 @@
 package com.gradingapp.controller;
 
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.gradingapp.model.Homework;
-import com.gradingapp.model.Problem;
 import com.gradingapp.service.FileService;
 import com.gradingapp.service.HomeworkService;
 
