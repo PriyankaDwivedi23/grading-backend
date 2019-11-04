@@ -12,13 +12,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileService {
 	
 	
-private static final String folderPath = "C:/Users/sonal/Documents/grading-backend/src/main/resources/uploads/";
+private static final String folderPath = "/Users/bebo/Documents/grading-backend/src/main/resources/uploads/";
     
     public ResponseEntity  handleFileUpload(MultipartFile file, String Type , String homeworkName, String questionName, String userName) {
         try {
         	File directory  = new File(generatePath(Type, homeworkName, questionName, userName));
         	if(!directory.exists()) directory.mkdirs();
-        	String finalPath = directory + "\\" + file.getOriginalFilename();
+        	String finalPath = directory + "/" + file.getOriginalFilename();
         	System.out.println(finalPath);
             File fileToSave = new File(finalPath);
             file.transferTo(fileToSave);

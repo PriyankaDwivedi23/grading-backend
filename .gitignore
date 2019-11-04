@@ -3,7 +3,7 @@ node_modules/
 someOtherfoler/
 target/
 bin/
-
+uploads/
 # Compiled source #
 ###################
 *.com
