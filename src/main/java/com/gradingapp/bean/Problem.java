@@ -6,6 +6,7 @@ public class Problem {
 	String problemDescription;
 	String homeworkName;
 	
+	
 	public Problem(String problemName, String problemDescription, String homeworkName) {
 		this.problemName = problemName;
 		this.problemDescription = problemDescription;

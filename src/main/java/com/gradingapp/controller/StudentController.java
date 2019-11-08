@@ -9,23 +9,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gradingapp.bean.Student;
 import com.gradingapp.model.StudentHomework;
+import com.gradingapp.service.FileService;
 import com.gradingapp.service.StudentService;
 
 @CrossOrigin("*")
 @RestController
 public class StudentController {
+	
+	
 	@Autowired
 	private StudentService studentService;
+	@Autowired
+	FileService fileService;
 	
 	@CrossOrigin
 	@PostMapping(value = "/submitHomework")
-	public ResponseEntity submitHomework(MultipartFile sourceCode, StudentHomework studentHomework) {
+	public ResponseEntity submitHomework(MultipartFile sourceCode, Student studentHomework) {
 		
 		System.out.println(sourceCode.getSize());
 		System.out.println(studentHomework.getUserName()+ studentHomework.getHomeworkName() + studentHomework.getQuestionName());
-		
-		studentService.submitHomework(sourceCode, new StudentHomework(studentHomework.getUserName(), studentHomework.getHomeworkName() , studentHomework.getQuestionName()));
+		fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
+		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName() , studentHomework.getQuestionName()));
 		
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 	}

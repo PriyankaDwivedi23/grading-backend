@@ -34,13 +34,11 @@ public class HomeworkDaoImpl implements HomeworkDao{
 
 	@Override
 	public void update(Homework h) {
-		// TODO Auto-generated method stub
 		mongoTemplate.save(h);
 	}
 
 	@Override
 	public void delete(Homework h) {
-		// TODO Auto-generated method stub
 		mongoTemplate.remove(h);
 	}
 
@@ -65,7 +63,6 @@ public class HomeworkDaoImpl implements HomeworkDao{
 
 	@Override
 	public void updateProblem(Problem p) {
-		// TODO Auto-generated method stub
 		Query query = new Query(Criteria.where("homeworkName").is(p.getHomeworkName()));
 		Update updateCmd = new Update();
 		updateCmd.addToSet("problem", p);
