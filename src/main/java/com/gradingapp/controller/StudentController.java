@@ -37,5 +37,15 @@ public class StudentController {
 		
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 	}
+	
+	@CrossOrigin
+	@PostMapping(value = "/uploadWriteup")
+	public ResponseEntity uploadWriteup(MultipartFile writeupFile, Student student) {
+		if(null != writeupFile) {
+			fileService.handleFileUpload(writeupFile, "Writeup", student.getHomeworkName(), "", student.getUserName());
+		}
+		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
+	}
+	
  
 }
