@@ -19,6 +19,9 @@ private static final String folderPath = "/Users/bebo/Documents/grading-backend/
         	File directory  = new File(generatePath(Type, homeworkName, questionName, userName));
         	if(!directory.exists()) directory.mkdirs();
         	String finalPath = directory + "/" + file.getOriginalFilename();
+        	if(Type.equals("Student")) {
+        		finalPath = directory + "/" + "Main.java";
+        	}
         	System.out.println(finalPath);
             File fileToSave = new File(finalPath);
             file.transferTo(fileToSave);
@@ -28,7 +31,7 @@ private static final String folderPath = "/Users/bebo/Documents/grading-backend/
         return ResponseEntity.ok().build();
     }
     
-    private String generatePath(String Type , String homeworkName, String questionName, String userName) {
+    public String generatePath(String Type , String homeworkName, String questionName, String userName) {
     	String finalPath = folderPath;
     	String delimiter = "/";
     	switch(Type) {

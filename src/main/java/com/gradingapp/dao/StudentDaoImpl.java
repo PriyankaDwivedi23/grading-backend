@@ -27,26 +27,24 @@ public class StudentDaoImpl implements StudentDao{
 	@Autowired
     MongoTemplate mongoTemplate;
  
-    final String COLLECTION = "studentHomework";
+    final String COLLECTION = "student";
     
 	@Override
 	public void create(Student s) {
-//		.and("homeworkName").is(s.getHomeworkName())
-//        .and("questionName").is(s.getQuestionName())
-		System.out.print(s.getUserName());
+
 		Query query = new Query(Criteria 
-	            .where("userName").is(s.getUserName()));
+	            .where("userName").is(s.getUserName())
+	            .and("homeworkName").is(s.getHomeworkName())
+	            .and("questionName").is(s.getQuestionName()));
 		
-		Student student =  mongoTemplate.findOne(query, Student.class);
+		List<Student> students =  mongoTemplate.find(query, Student.class);
+		for(Student student : students) {
+//			student.s
+		}
+		if(students.isEmpty()) {
+			mongoTemplate.save(s);
+		}
 
-		System.out.println("student info - " + student);
-
-		//modify and update with save()
-//		userTest1.setAge(99);
-//		mongoOperation.save(userTest1);
-//
-//		//get the updated object again
-//		User userTest1_1 = mongoOperation.findOne(query, User.class);
 	}
 
 	@Override
