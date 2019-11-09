@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -72,13 +73,25 @@ public class HomeworkController {
     
     @CrossOrigin
 	@GetMapping(value = "/findProblem")
-    public ResponseEntity<?> find(Homework h){
-    	System.out.println("Homework name: " + h.getHomeworkName());
+    public ResponseEntity<?> find(@RequestParam("homeworkName") String homeworkName){
+    	System.out.println("Homework name: " + homeworkName);
     	List<String> problemNames = new ArrayList<String>();
-//    	List<Problem> problems = homeworkService.findProblem(homeworkName);
-//    	for(Problem problem: problems) {
-//    		problemNames.add(problem.getProblemName());
-//    	}
-    	return new ResponseEntity("", HttpStatus.OK);
+    	List<Problem> problems = homeworkService.findProblem(homeworkName);
+    	for(Problem problem: problems) {
+    		problemNames.add(problem.getProblemName());
+    	}
+    	return new ResponseEntity(problemNames, HttpStatus.OK);
+    }
+    
+    @CrossOrigin
+	@GetMapping(value = "/findAll")
+    public ResponseEntity<?> findAll(){
+    	List<String> homeworkNames = new ArrayList<String>();
+    	List<Homework> homeworks = homeworkService.findAll();
+    	for(Homework homework: homeworks) {
+    		homeworkNames.add(homework.getHomeworkName());
+    	}
+    	System.out.println("Homeworknames list: " + homeworkNames);
+    	return new ResponseEntity(homeworkNames, HttpStatus.OK);
     }
 }

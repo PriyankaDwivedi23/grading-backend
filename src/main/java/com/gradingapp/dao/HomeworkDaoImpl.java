@@ -91,4 +91,12 @@ public class HomeworkDaoImpl implements HomeworkDao{
 		return problems;
 	}
 
+	@Override
+	public List<Homework> findAll() {
+		Query query = new Query();
+		List<Homework> homeworks = mongoTemplate.find(query, Homework.class);
+		System.out.println("Homeworks count: " + homeworks.size());
+		return homeworks;
+	}
+
 }
