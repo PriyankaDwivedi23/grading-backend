@@ -6,11 +6,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "student")
 public class Student {
 	@Id
-	String id;
+	String _id;
 	String userName;
 	String homeworkName;
 	String questionName;
-//	Integer result;
+
 	
 	public Student(String userName, String homeworkName, String questionName) {
 		this.userName = userName;
@@ -20,10 +20,10 @@ public class Student {
 	}
 	
 	public String getId() {
-		return id;
+		return _id;
 	}
 	public void setId(String id) {
-		this.id = id;
+		this._id = id;
 	}
 	public String getUserName() {
 		return userName;

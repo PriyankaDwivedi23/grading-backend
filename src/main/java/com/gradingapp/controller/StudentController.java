@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gradingapp.bean.Student;
-import com.gradingapp.model.StudentHomework;
+
 import com.gradingapp.service.FileService;
 import com.gradingapp.service.StudentService;
 
@@ -28,14 +28,14 @@ public class StudentController {
 	@PostMapping(value = "/submitHomework")
 	public ResponseEntity submitHomework(MultipartFile sourceCode, Student studentHomework) {
 		
-//		Systsem.out.println(sourceCode.getSize());
+		if(sourceCode != null) {
+			fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
+		}
+		
 		System.out.println(studentHomework.getUserName()+ studentHomework.getHomeworkName() + studentHomework.getQuestionName());
-//		fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
 		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName() , studentHomework.getQuestionName()));
 		
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 	}
-	
-//	@GetMapping(Value="/getHomework")
-//	public ResponseEntity  
+ 
 }
