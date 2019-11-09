@@ -28,12 +28,14 @@ public class StudentController {
 	@PostMapping(value = "/submitHomework")
 	public ResponseEntity submitHomework(MultipartFile sourceCode, Student studentHomework) {
 		
-		System.out.println(sourceCode.getSize());
+//		Systsem.out.println(sourceCode.getSize());
 		System.out.println(studentHomework.getUserName()+ studentHomework.getHomeworkName() + studentHomework.getQuestionName());
-		fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
+//		fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
 		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName() , studentHomework.getQuestionName()));
 		
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 	}
-
+	
+//	@GetMapping(Value="/getHomework")
+//	public ResponseEntity  
 }
