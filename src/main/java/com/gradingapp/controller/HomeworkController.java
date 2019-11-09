@@ -2,6 +2,7 @@ package com.gradingapp.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,16 +53,24 @@ public class HomeworkController {
 	}
     
     @CrossOrigin
-	@GetMapping(value = "/findAll")
-    public List<Homework> findAll(){
-    	System.out.println("Inside find All controller");
-    	return homeworkService.findAll();
+	@GetMapping(value = "/availableHomework")
+    public List<String> availableHomework(){
+    	List<String> homeworkNames = new ArrayList<String>();
+    	List<Homework> homeworks = homeworkService.availableHomework();
+    	for(Homework homework: homeworks) {
+    		homeworkNames.add(homework.getHomeworkName());
+    	}
+    	return homeworkNames;
     }
     
     @CrossOrigin
 	@GetMapping(value = "/findProblem")
-    public List<Problem> find(String homeworkName){
-    	System.out.println("Inside find controller");
-    	return homeworkService.findProblem(homeworkName);
+    public List<String> find(String homeworkName){
+    	List<String> problemNames = new ArrayList<String>();
+    	List<Problem> problems = homeworkService.findProblem(homeworkName);
+    	for(Problem problem: problems) {
+    		problemNames.add(problem.getProblemName());
+    	}
+    	return problemNames;
     }
 }

@@ -61,7 +61,7 @@ public class HomeworkDaoImpl implements HomeworkDao{
 	}
 
 	@Override
-	public List<Homework> findAll() {
+	public List<Homework> availableHomework() {
 		DateFormat dateFormat =  new SimpleDateFormat("MM/dd/yyyy");
 		String date = dateFormat.format(new Date());
 		System.out.println("Today's date: " + date);
