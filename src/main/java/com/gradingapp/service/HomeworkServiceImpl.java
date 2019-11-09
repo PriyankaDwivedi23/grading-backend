@@ -17,45 +17,43 @@ public class HomeworkServiceImpl implements HomeworkService{
 
 	@Override
 	public void create(Homework h) {
-		// TODO Auto-generated method stub
 		homeworkDao.create(h);
 	}
 
 	@Override
 	public void update(Homework h) {
-		// TODO Auto-generated method stub
 		homeworkDao.update(h);
 	}
 
 	@Override
 	public void delete(Homework h) {
-		// TODO Auto-generated method stub
 		homeworkDao.delete(h);
 	}
 
 	@Override
 	public void deleteAll() {
-		// TODO Auto-generated method stub
 		homeworkDao.deleteAll();
 	}
 
 	@Override
 	public Homework find(Homework h) {
-		// TODO Auto-generated method stub
 		return homeworkDao.find(h);
 	}
 
 	@Override
-	public List<Homework> findAll() {
-		// TODO Auto-generated method stub
-		return homeworkDao.findAll();
+	public List<Homework> availableHomework() {
+		return homeworkDao.availableHomework();
 	}
 
 	@Override
 	public void updateProblem(Problem p) {
-		// TODO Auto-generated method stub
 		homeworkDao.updateProblem(p);
 		
+	}
+
+	@Override
+	public List<Problem> findProblem(String homeworkName) {
+		return homeworkDao.findProblem(homeworkName);
 	}
 
 }

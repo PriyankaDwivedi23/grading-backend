@@ -19,6 +19,8 @@ public interface HomeworkService {
  
     public Homework find(Homework h);
  
-    public List < Homework > findAll();
+    public List<Homework> availableHomework();
+    
+    public List<Problem> findProblem(String homeworkName);
 
 }
