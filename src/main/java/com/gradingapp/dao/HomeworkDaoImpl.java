@@ -60,7 +60,7 @@ public class HomeworkDaoImpl implements HomeworkDao{
 
 	@Override
 	public List<Homework> availableHomework() {
-		DateFormat dateFormat =  new SimpleDateFormat("yyyy/MM/dd");
+		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd");
 		String date = dateFormat.format(new Date());
 		System.out.println("Today's date: " + date);
 		
@@ -89,6 +89,14 @@ public class HomeworkDaoImpl implements HomeworkDao{
 			System.out.println("Problems count: " + problems.size());
 		}
 		return problems;
+	}
+
+	@Override
+	public List<Homework> findAll() {
+		Query query = new Query();
+		List<Homework> homeworks = mongoTemplate.find(query, Homework.class);
+		System.out.println("Homeworks count: " + homeworks.size());
+		return homeworks;
 	}
 
 }

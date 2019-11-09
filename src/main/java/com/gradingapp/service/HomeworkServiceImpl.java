@@ -56,4 +56,9 @@ public class HomeworkServiceImpl implements HomeworkService{
 		return homeworkDao.findProblem(homeworkName);
 	}
 
+	@Override
+	public List<Homework> findAll() {
+		return homeworkDao.findAll();
+	}
+
 }

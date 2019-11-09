@@ -22,5 +22,7 @@ public interface HomeworkService {
     public List<Homework> availableHomework();
     
     public List<Problem> findProblem(String homeworkName);
+    
+    public List<Homework> findAll();
 
 }
