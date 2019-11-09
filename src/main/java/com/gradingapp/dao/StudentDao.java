@@ -1,11 +1,10 @@
-package com.gradingapp.service;
+package com.gradingapp.dao;
 
 import java.util.List;
 
 import com.gradingapp.bean.Student;
 
-
-public interface StudentService {
+public interface StudentDao {
 	
 	public void create(Student s);
 	 

@@ -37,13 +37,11 @@ public class HomeworkDaoImpl implements HomeworkDao{
 
 	@Override
 	public void update(Homework h) {
-		// TODO Auto-generated method stub
 		mongoTemplate.save(h);
 	}
 
 	@Override
 	public void delete(Homework h) {
-		// TODO Auto-generated method stub
 		mongoTemplate.remove(h);
 	}
 

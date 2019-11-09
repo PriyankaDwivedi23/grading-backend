@@ -1,20 +1,29 @@
-package com.gradingapp.model;
+package com.gradingapp.bean;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.multipart.MultipartFile;
 
-@Document
-public class StudentHomework {
-	
-	
+@Document(collection = "student")
+public class Student {
+	@Id
+	String _id;
 	String userName;
 	String homeworkName;
 	String questionName;
+
 	
-	public StudentHomework(String userName, String homeworkName, String questionName) {
+	public Student(String userName, String homeworkName, String questionName) {
 		this.userName = userName;
 		this.homeworkName = homeworkName;
 		this.questionName = questionName;
+//		this.result = 0;
+	}
+	
+	public String getId() {
+		return _id;
+	}
+	public void setId(String id) {
+		this._id = id;
 	}
 	public String getUserName() {
 		return userName;
