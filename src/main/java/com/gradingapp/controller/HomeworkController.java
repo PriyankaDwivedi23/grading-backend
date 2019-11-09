@@ -16,16 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.gradingapp.bean.Homework;
+import com.gradingapp.bean.Problem;
 import com.gradingapp.service.FileService;
 import com.gradingapp.service.HomeworkService;
-import com.gradingapp.bean.Problem;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.gradingapp.bean.Homework;
 
 
 @CrossOrigin("*")
@@ -40,14 +37,14 @@ public class HomeworkController {
 	
     @CrossOrigin
 	@PostMapping(value = "/create" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity create(@ModelAttribute Homework homework) {       
+	public ResponseEntity<?> create(@ModelAttribute Homework homework) {       
 		homeworkService.create(homework);
-		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
+		return new ResponseEntity<>("Successfully uploaded!", HttpStatus.OK);
 	}
     
     @CrossOrigin
 	@PostMapping(value = "/upload")
-	public ResponseEntity upload(MultipartFile inputFile, MultipartFile outputFile, Problem problem) {
+	public ResponseEntity<?> upload(MultipartFile inputFile, MultipartFile outputFile, Problem problem) {
 		
 		System.out.println(problem.getHomeworkName()+   "    " + problem.getProblemName() + "    "+  problem.getProblemDescription());
 		
@@ -55,7 +52,7 @@ public class HomeworkController {
 		fileService.handleFileUpload(outputFile, "Professor-Output", problem.getHomeworkName(), problem.getProblemName(), "");
 		
 		homeworkService.updateProblem(new Problem(problem.getProblemName(), problem.getProblemDescription(),problem.getHomeworkName()));
-		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
+		return new ResponseEntity<>("Successfully uploaded!", HttpStatus.OK);
 	}
     
     @CrossOrigin
@@ -68,7 +65,7 @@ public class HomeworkController {
     	}
     	System.out.println("Homeworknames list: " + homeworkNames);
     	
-    	return new ResponseEntity(homeworkNames, HttpStatus.OK);
+    	return new ResponseEntity<>(homeworkNames, HttpStatus.OK);
     }
     
     @CrossOrigin
@@ -80,11 +77,11 @@ public class HomeworkController {
     	for(Problem problem: problems) {
     		problemNames.add(problem.getProblemName());
     	}
-    	return new ResponseEntity(problemNames, HttpStatus.OK);
+    	return new ResponseEntity<>(problemNames, HttpStatus.OK);
     }
     
     @CrossOrigin
-	@GetMapping(value = "/findAll")
+	@GetMapping(value = "/findAllHomework")
     public ResponseEntity<?> findAll(){
     	List<String> homeworkNames = new ArrayList<String>();
     	List<Homework> homeworks = homeworkService.findAll();
@@ -92,6 +89,6 @@ public class HomeworkController {
     		homeworkNames.add(homework.getHomeworkName());
     	}
     	System.out.println("Homeworknames list: " + homeworkNames);
-    	return new ResponseEntity(homeworkNames, HttpStatus.OK);
+    	return new ResponseEntity<>(homeworkNames, HttpStatus.OK);
     }
 }
