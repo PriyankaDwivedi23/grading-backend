@@ -72,13 +72,13 @@ public class HomeworkController {
     
     @CrossOrigin
 	@GetMapping(value = "/findProblem")
-    @ResponseBody
-    public ResponseEntity<?> find(String homeworkName){
+    public ResponseEntity<?> find(Homework h){
+    	System.out.println("Homework name: " + h.getHomeworkName());
     	List<String> problemNames = new ArrayList<String>();
-    	List<Problem> problems = homeworkService.findProblem(homeworkName);
-    	for(Problem problem: problems) {
-    		problemNames.add(problem.getProblemName());
-    	}
-    	return new ResponseEntity(problemNames, HttpStatus.OK);
+//    	List<Problem> problems = homeworkService.findProblem(homeworkName);
+//    	for(Problem problem: problems) {
+//    		problemNames.add(problem.getProblemName());
+//    	}
+    	return new ResponseEntity("", HttpStatus.OK);
     }
 }
