@@ -1,6 +1,9 @@
 package com.gradingapp.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,22 +62,35 @@ public class HomeworkDaoImpl implements HomeworkDao{
 
 	@Override
 	public List<Homework> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		DateFormat dateFormat =  new SimpleDateFormat("MM/dd/yyyy");
+		String date = dateFormat.format(new Date());
+		System.out.println("Today's date: " + date);
+		
+		Query query = new Query(Criteria.where("dueDate").gte(date));
+		List<Homework> homeworks = mongoTemplate.find(query, Homework.class);
+		System.out.println("Homeworks count: " + homeworks.size());
+		return homeworks;
 	}
 
 	@Override
 	public void updateProblem(Problem p) {
-		// TODO Auto-generated method stub
 		Query query = new Query(Criteria.where("homeworkName").is(p.getHomeworkName()));
 		Update updateCmd = new Update();
 		updateCmd.addToSet("problem", p);
 		mongoTemplate.updateFirst(query, updateCmd, Homework.class);
-//        Homework h = mongoTemplate.findOne(query, Homework.class, COLLECTION);
-//        System.out.print(h.getHomeworkName());
-        
-		
-		
+	}
+
+	@Override
+	public List<Problem> findProblem(String homeworkName) {
+		List<Problem> problems = null;
+		Query query = new Query(Criteria.where("homeworkName").is(homeworkName));
+		Homework result = mongoTemplate.findOne(query, Homework.class);
+		System.out.println("Homework: " + result);
+		if(null != result) {
+			problems = result.getProblem();
+			System.out.println("Problems count: " + problems.size());
+		}
+		return problems;
 	}
 
 }

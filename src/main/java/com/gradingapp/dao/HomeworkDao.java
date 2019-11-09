@@ -21,4 +21,5 @@ public interface HomeworkDao {
  
     public List < Homework > findAll();
 
+    public List<Problem> findProblem(String homeworkName);
 }
