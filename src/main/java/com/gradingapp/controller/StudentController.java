@@ -30,6 +30,10 @@ public class StudentController {
 		
 		if(sourceCode != null) {
 			fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
+			String inputFilePath = fileService.generatePath("Professor-input", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"input.txt";
+			String outputFilePath = fileService.generatePath("Professor-output", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"output.txt";
+			String studentCodePath = fileService.generatePath("Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName()) +"Main.java";
+			
 		}
 		
 		System.out.println(studentHomework.getUserName()+ studentHomework.getHomeworkName() + studentHomework.getQuestionName());
