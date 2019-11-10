@@ -1,5 +1,9 @@
 package com.gradingapp.bean;
 
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,13 +14,37 @@ public class Student {
 	String userName;
 	String homeworkName;
 	String questionName;
+	Result result;
+	String lastModifiedDate;
 
-	
-	public Student(String userName, String homeworkName, String questionName) {
+	public Student() {
+	}
+	public String get_id() {
+		return _id;
+	}
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+	public Result getResult() {
+		return result;
+	}
+	public void setResult(Result result) {
+		this.result = result;
+	}
+	public String getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+	public void setLastModifiedDate(String lastModifiedDate) {
+		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		this.lastModifiedDate = dateFormat.format(new Date());
+	}
+	public Student(String userName, String homeworkName, String questionName, Result result) {
 		this.userName = userName;
 		this.homeworkName = homeworkName;
 		this.questionName = questionName;
-//		this.result = 0;
+		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		this.lastModifiedDate = dateFormat.format(new Date());
+		this.result = result;
 	}
 	
 	public String getId() {

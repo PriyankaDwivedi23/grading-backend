@@ -3,6 +3,7 @@ package com.gradingapp.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,8 +16,6 @@ import com.gradingapp.bean.Homework;
 import com.gradingapp.bean.Student;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-
-
 
 
 @Repository
@@ -39,7 +38,12 @@ public class StudentDaoImpl implements StudentDao{
 		
 		List<Student> students =  mongoTemplate.find(query, Student.class);
 		for(Student student : students) {
-//			student.s
+			student.setResult(s.getResult());
+			student.setLastModifiedDate(s.getLastModifiedDate());
+			Document doc = new Document(); // org.bson.Document
+			mongoTemplate.getConverter().write(student, doc);
+			Update update = Update.fromDocument(doc);
+			mongoTemplate.upsert(query, update, "student");
 		}
 		if(students.isEmpty()) {
 			mongoTemplate.save(s);

@@ -21,27 +21,18 @@ public class CompileAndRunService {
         Result r = new Result();
         HashMap<String, Object> result = new HashMap() ;
         String expectedOutput = expectedOutput(outputTestFilePath);
-        
         try {
-//        	runProcess("cd /Users/bebo/Documents/grading-backend/src/main/resources/uploads/Student/pd6741/homework-1/problem-1/" );
-            
-//        	result = runProcess("javac -cp src "+sourceCodePath+ "Main.java" );
             Boolean testCasePassed = false;
-//            if(result.get("status").toString().equals("0")) {
-            	result = runProcess("java "+ sourceCodePath+"Main.java "+ inputTestFilePath );
-                testCasePassed = compareResults(result.get("studentOutput").toString(), expectedOutput);
-//
-//            }
+            result = runProcess("java -cp src "+sourceCodePath+"Main.java "+ inputTestFilePath );
+            testCasePassed = compareResults(result.get("studentOutput").toString(), expectedOutput);
             r.setStatus((int)result.get("status"));
             r.setStudentOutput(result.get("studentOutput").toString());
             r.setExpectedOutput(expectedOutput);
             r.setErrorOutput(result.get("errorOutput").toString());
             r.setTestCasePassed(testCasePassed);
-            PrintResult(r);
         } catch (Exception e) {
             System.out.println("failing");
         }
-        PrintResult(r);
         return r;
 
     }
@@ -88,12 +79,5 @@ public class CompileAndRunService {
 
     private  Boolean compareResults(String studentOuput, String expectedOutput ) {
         return studentOuput.equals(expectedOutput);
-    }
-
-    private void PrintResult(Result r){
-        System.out.println(r.getStatus());
-        System.out.println(r.getStudentOutput());
-        System.out.println(r.getExpectedOutput());
-        System.out.println(r.getTestCasePassed());
     }
 }

@@ -12,16 +12,17 @@ public class Result {
     private Boolean testCasePassed;
 
     public Result() {
-        this.status = 1;
+        this.status = 0;
         this.studentOutput = "";
         this.expectedOutput = "";
         this.errorOutput = "";
-        this.testCasePassed = false;
+        this.testCasePassed = true;
     }
-    public Result(int status, String studentOutput, String expectedOutput, Boolean testCasePassed) {
+    public Result(int status, String studentOutput, String expectedOutput,String errorOutput, Boolean testCasePassed) {
         this.status = status;
         this.studentOutput = studentOutput;
         this.expectedOutput = expectedOutput;
+        this.errorOutput = errorOutput;
         this.testCasePassed = testCasePassed;
     }
     public int getStatus() {

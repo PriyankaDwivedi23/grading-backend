@@ -41,7 +41,7 @@ public class StudentController {
 		}
 		
 		
-		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName() , studentHomework.getQuestionName()));
+		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName() , studentHomework.getQuestionName(),result));
 		
 		return new ResponseEntity(result, HttpStatus.OK);
 	}
