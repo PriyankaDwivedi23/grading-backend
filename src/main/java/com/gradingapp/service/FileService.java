@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileService {
 	
 	
-private static final String folderPath = "C:/Users/sonal/Documents/grading-backend/src/main/resources/uploads/";
+private static final String folderPath = "/Users/bebo/Documents/grading-backend/src/main/resources/uploads/";
     
     public ResponseEntity  handleFileUpload(MultipartFile file, String Type , String homeworkName, String questionName, String userName) {
         try {
@@ -49,19 +49,19 @@ private static final String folderPath = "C:/Users/sonal/Documents/grading-backe
     
     public String generatePath(String Type , String homeworkName, String questionName, String userName) {
     	String finalPath = folderPath;
-    	String delimiter = "\\";
+    	String delimiter = "/";
     	switch(Type) {
     	case "Student" :
     		finalPath += Type + delimiter + userName + delimiter + homeworkName + delimiter + questionName + delimiter;
     		break;
     	case "Professor-Input":
-    		finalPath += "Professor" + delimiter + userName + delimiter + homeworkName + delimiter+ questionName + delimiter +  "inputFiles" + delimiter ;
+    		finalPath += "Professor" + delimiter  + homeworkName + delimiter+ questionName + delimiter +  "inputFiles" + delimiter ;
     		break;
     	case "Professor-Output":
-    		finalPath += "Professor" + delimiter + userName + delimiter + homeworkName + delimiter + questionName + delimiter +  "outputFiles" + delimiter;
+    		finalPath += "Professor" + delimiter  + homeworkName + delimiter + questionName + delimiter +  "outputFiles" + delimiter;
     		break;
     	case "Writeup" :
-    		finalPath += "Student" + delimiter + userName + delimiter + homeworkName + delimiter + "writeup" + delimiter;
+    		finalPath += "Student" + delimiter + homeworkName + delimiter + "writeup" + delimiter;
     		break;
     	}
     	return finalPath;
