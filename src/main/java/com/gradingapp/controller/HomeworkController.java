@@ -1,7 +1,5 @@
 package com.gradingapp.controller;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.gradingapp.bean.Homework;
 import com.gradingapp.bean.Problem;
-import com.gradingapp.service.FileService;
 import com.gradingapp.service.HomeworkService;
 
 
@@ -32,26 +28,10 @@ public class HomeworkController {
 	@Autowired
 	HomeworkService homeworkService;
 	
-	@Autowired
-	FileService fileService;
-	
     @CrossOrigin
 	@PostMapping(value = "/create" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> create(@ModelAttribute Homework homework) {       
 		homeworkService.create(homework);
-		return new ResponseEntity<>("Successfully uploaded!", HttpStatus.OK);
-	}
-    
-    @CrossOrigin
-	@PostMapping(value = "/upload")
-	public ResponseEntity<?> upload(MultipartFile inputFile, MultipartFile outputFile, Problem problem) {
-		
-		System.out.println(problem.getHomeworkName()+   "    " + problem.getProblemName() + "    "+  problem.getProblemDescription());
-		
-		fileService.handleFileUpload(inputFile, "Professor-Input", problem.getHomeworkName(), problem.getProblemName(), "");
-		fileService.handleFileUpload(outputFile, "Professor-Output", problem.getHomeworkName(), problem.getProblemName(), "");
-		
-		homeworkService.updateProblem(new Problem(problem.getProblemName(), problem.getProblemDescription(),problem.getHomeworkName()));
 		return new ResponseEntity<>("Successfully uploaded!", HttpStatus.OK);
 	}
     

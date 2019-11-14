@@ -15,6 +15,8 @@ import com.gradingapp.service.CompileAndRunService;
 import com.gradingapp.service.FileService;
 import com.gradingapp.service.StudentService;
 
+import utils.FileUtils;
+
 @CrossOrigin("*")
 @RestController
 public class StudentController {
@@ -34,13 +36,11 @@ public class StudentController {
 		System.out.println(studentHomework.getUserName()+ studentHomework.getHomeworkName() + studentHomework.getQuestionName());
 		if(sourceCode != null) {
 			fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
-			String inputFilePath = fileService.generatePath("Professor-Input", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"input.txt";
-			String outputFilePath = fileService.generatePath("Professor-Output", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"output.txt";
-			String studentCodePath = fileService.generatePath("Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
+			String inputFilePath = FileUtils.generatePath("Professor-Input", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"input.txt";
+			String outputFilePath = FileUtils.generatePath("Professor-Output", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"output.txt";
+			String studentCodePath = FileUtils.generatePath("Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
 			result = c.compileAndRun(studentCodePath, inputFilePath, outputFilePath);
 		}
-		
-		
 		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName() , studentHomework.getQuestionName(),result));
 		
 		return new ResponseEntity(result, HttpStatus.OK);

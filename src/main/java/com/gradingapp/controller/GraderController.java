@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 import com.gradingapp.service.GraderService;
 
@@ -25,4 +26,11 @@ public class GraderController {
 		List<StudentData> studentData = graderService.getHomeworkSubmissions(homeworkName);
 		return new ResponseEntity<>(studentData, HttpStatus.OK);
 	}
+	
+	@CrossOrigin
+	@GetMapping(value = "/getSubmissionFiles")
+	public ResponseEntity<?> getSubmissionFiles(@RequestParam("homeworkName") Student student){
+		
+		return new ResponseEntity<>(student, HttpStatus.OK);
+	} 
 }
