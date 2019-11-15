@@ -1,4 +1,4 @@
-package utils;
+package com.gradingapp.utils;
 
 public class FileUtils {
 	

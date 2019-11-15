@@ -18,8 +18,7 @@ import com.gradingapp.bean.Result;
 import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 import com.gradingapp.service.GraderService;
-
-import utils.FileUtils;
+import com.gradingapp.utils.FileUtils;
 
 @RestController
 public class GraderController {

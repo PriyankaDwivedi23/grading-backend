@@ -13,8 +13,7 @@ import com.gradingapp.bean.Student;
 import com.gradingapp.service.CompileAndRunService;
 import com.gradingapp.service.FileService;
 import com.gradingapp.service.StudentService;
-
-import utils.FileUtils;
+import com.gradingapp.utils.FileUtils;
 
 @CrossOrigin("*")
 @RestController

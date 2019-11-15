@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import utils.FileUtils;
+import com.gradingapp.utils.FileUtils;
 
 @Service("fileService")
 public class FileServiceImpl implements FileService {
