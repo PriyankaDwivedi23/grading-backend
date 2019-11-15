@@ -1,9 +1,7 @@
 package com.gradingapp.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,35 +26,48 @@ public class GraderDaoImpl implements GraderDao {
 		
 		List<StudentData> studentDataList = new ArrayList<StudentData>(); 
 		
-		HashMap<String, List<String>> studentProblemMap = new HashMap<String, List<String>>();
 		Query query = new Query(Criteria.where("homeworkName").is(homeworkName));
 		List<Student> students = mongoTemplate.find(query, Student.class);
-		for(Student student:  students){
+		
+		System.out.println("Result size: " + students.size());
+		
+		for(Student student: students){
 			String userName = student.getUserName();
-			String problemName = student.getQuestionName();
-			String submissionDate = student.getLastModifiedDate();
-
-			if(studentProblemMap.containsKey(userName)) {
-				List<String> problemList = studentProblemMap.get(userName);
-				problemList.add(problemName);
-				studentProblemMap.put(userName, problemList);
+			
+			boolean isUserExist = false;
+			
+			if(studentDataList != null && studentDataList.size() > 0) {
+				for(StudentData studentData: studentDataList) {
+					if(userName.equals(studentData.getUserName())) {
+						studentData.getProblems().add(student.getQuestionName());
+						studentData.getSubmissionDates().add(student.getLastModifiedDate());
+						isUserExist = true;
+					}
+				}
+				if(!isUserExist) {
+					StudentData studentData = setStudentData(student);
+					studentDataList.add(studentData);
+				}
 			}else {
-				List<String> problems = new ArrayList<String>();
-				problems.add(problemName);
-				studentProblemMap.put(userName, problems);
+				StudentData studentData = setStudentData(student);
+				studentDataList.add(studentData);
 			}
 		}
 		
-		for(Map.Entry<String, List<String>> entry: studentProblemMap.entrySet()) {
-			studentDataList.add(getStudentData(entry.getKey(), entry.getValue()));
+		for(StudentData data: studentDataList) {
+			System.out.println("User: " + data.getUserName());
+			System.out.println("User prob: " + data.getProblems());
+			System.out.println("User dates: " + data.getSubmissionDates());
 		}
+		
 		return studentDataList;
 	}
 	
-	private StudentData getStudentData(String userName, List<String> problems) {
+	private StudentData setStudentData(Student student) {
 		StudentData studentData = new StudentData();
-		studentData.setUserName(userName);
-		studentData.setProblems(problems);
+		studentData.setUserName(student.getUserName());
+		studentData.getProblems().add(student.getQuestionName());
+		studentData.getSubmissionDates().add(student.getLastModifiedDate());
 		return studentData;
 	}
 

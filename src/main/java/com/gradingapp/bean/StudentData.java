@@ -1,5 +1,6 @@
 package com.gradingapp.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class StudentData {
 	
 	private String userName;
-	private List<String> problems;
-	private List<String> submissionDates;
+	private List<String> problems = new ArrayList<String>();
+	private List<String> submissionDates = new ArrayList<String>();
 	
 	public String getUserName() {
 		return userName;
