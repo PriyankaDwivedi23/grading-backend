@@ -22,7 +22,7 @@ public class FileUtils {
     
     public static String generatePath(String Type , String homeworkName, String questionName, String userName) {
     	String finalPath = folderPath;
-    	String delimiter = "/";
+    	String delimiter = "//";
     	switch(Type) {
     	case "Student" :
     		finalPath += Type + delimiter + userName + delimiter + homeworkName + delimiter + questionName + delimiter;

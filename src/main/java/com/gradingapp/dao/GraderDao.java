@@ -11,4 +11,6 @@ public interface GraderDao {
 	public List<StudentData> getHomeworkSubmissions(String homeworkName);
 	
 	public GraderData getSubmissionFiles(String homeworkName, String questionName, String userName);
+	
+	public void submitGrades(GraderData data);
 }

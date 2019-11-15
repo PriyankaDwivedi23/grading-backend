@@ -8,13 +8,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gradingapp.bean.GraderData;
+import com.gradingapp.bean.Result;
 import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 import com.gradingapp.service.GraderService;
+
+import utils.FileUtils;
 
 @RestController
 public class GraderController {
@@ -47,5 +52,13 @@ public class GraderController {
 //				student.getQuestionName(), student.getUserName());
 		
 		return new ResponseEntity<>(graderData, HttpStatus.OK);
-	} 
+	}
+	
+	@CrossOrigin
+	@PostMapping(value = "/submitGrades")
+	public ResponseEntity<?> submitGrades(GraderData graderData) {
+		
+		
+		return new ResponseEntity(HttpStatus.OK);
+	}
 }

@@ -93,4 +93,10 @@ public class GraderDaoImpl implements GraderDao {
 		return data;
 	}
 
+	@Override
+	public void submitGrades(GraderData data) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

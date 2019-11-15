@@ -31,10 +31,9 @@ private static final String folderPath = "uploads/";
         		directory.mkdirs();
         	}
         	
-        	String finalPath = directory + "/" + FileUtils.generateFileName(Type);
+        	String finalPath = directory + "//" + FileUtils.generateFileName(Type);
         	
 			Path path = Paths.get(finalPath);
-			System.out.println("Path: " + path);
 
         	try {
         		Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);

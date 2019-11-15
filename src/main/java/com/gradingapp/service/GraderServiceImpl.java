@@ -26,4 +26,9 @@ public class GraderServiceImpl implements GraderService {
 		return graderDao.getSubmissionFiles(homeworkName, questionName, userName);
 	}
 
+	@Override
+	public void submitGrades(GraderData data) {
+		graderDao.submitGrades(data);
+	}
+
 }
