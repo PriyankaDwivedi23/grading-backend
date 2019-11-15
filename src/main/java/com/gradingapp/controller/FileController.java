@@ -1,7 +1,5 @@
 package com.gradingapp.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,13 +42,13 @@ public class FileController {
 	
 	@CrossOrigin
 	@GetMapping(value = "/downloadFile")
-	public ResponseEntity<Resource> downloadFile(String homeworkName, String questionName, String userName, String fileName) {
-		System.out.println("Homework Name: " + fileName);
-		System.out.println("Question Name: " + fileName);
-		System.out.println("User Name: " + fileName);
-		System.out.println("File Name: " + fileName);
+	public ResponseEntity<Resource> downloadFile(@RequestParam("homeworkName") String homeworkName, 
+			@RequestParam("questionName")String questionName, @RequestParam("userName") String userName) {
+		System.out.println("Homework Name: " + homeworkName);
+		System.out.println("Question Name: " + questionName);
+		System.out.println("User Name: " + userName);
 		
-		Resource resource = fileService.downloadFile(homeworkName, questionName, userName, fileName);
+		Resource resource = fileService.downloadFile(homeworkName, questionName, userName, "Main.java");
 		
 		String contentType = "application/octet-stream";
 

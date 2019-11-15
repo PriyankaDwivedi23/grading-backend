@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.gradingapp.bean.GraderData;
 import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 
@@ -33,6 +34,7 @@ public class GraderDaoImpl implements GraderDao {
 		for(Student student:  students){
 			String userName = student.getUserName();
 			String problemName = student.getQuestionName();
+			String submissionDate = student.getLastModifiedDate();
 
 			if(studentProblemMap.containsKey(userName)) {
 				List<String> problemList = studentProblemMap.get(userName);
@@ -56,6 +58,28 @@ public class GraderDaoImpl implements GraderDao {
 		studentData.setUserName(userName);
 		studentData.setProblems(problems);
 		return studentData;
+	}
+
+	@Override
+	public GraderData getSubmissionFiles(String homeworkName, String questionName, String userName) {
+		Query query = new Query(Criteria.
+				where("homeworkName").is(homeworkName)
+				.and("questionName").is(questionName)
+				.and("userName").is(userName));
+		
+		
+		
+		Student result = mongoTemplate.findOne(query, Student.class);
+		GraderData data = setGraderData(result);
+		return data;
+	}
+	
+	private GraderData setGraderData(Student student) {
+		GraderData data = new GraderData();
+		data.setHomeworkFileName("Main.java");
+		data.setWriteupFileName("");
+		data.setResult(student.getResult());
+		return data;
 	}
 
 }
