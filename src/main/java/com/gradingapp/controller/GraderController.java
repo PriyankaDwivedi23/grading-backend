@@ -3,7 +3,6 @@ package com.gradingapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -11,14 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.gradingapp.bean.GraderData;
-import com.gradingapp.bean.Result;
 import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 import com.gradingapp.service.GraderService;
-import com.gradingapp.utils.FileUtils;
 
 @RestController
 public class GraderController {
@@ -56,7 +52,8 @@ public class GraderController {
 	@CrossOrigin
 	@PostMapping(value = "/submitGrades")
 	public ResponseEntity<?> submitGrades(Student student) {
+		System.out.println("Inside grader");
 		graderService.submitGrades(student);
-		return new ResponseEntity(HttpStatus.OK);
+		return new ResponseEntity<>("Successfully uploaded!", HttpStatus.OK);
 	}
 }

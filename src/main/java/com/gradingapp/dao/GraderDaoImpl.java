@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.gradingapp.bean.GraderData;
-import com.gradingapp.bean.Homework;
 import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 
@@ -44,6 +43,7 @@ public class GraderDaoImpl implements GraderDao {
 					if(userName.equals(studentData.getUserName())) {
 						studentData.getProblems().add(student.getQuestionName());
 						studentData.getSubmissionDates().add(student.getLastModifiedDate());
+						studentData.getMarksList().add(student.getMarks());
 						isUserExist = true;
 					}
 				}
@@ -61,6 +61,7 @@ public class GraderDaoImpl implements GraderDao {
 			System.out.println("User: " + data.getUserName());
 			System.out.println("User prob: " + data.getProblems());
 			System.out.println("User dates: " + data.getSubmissionDates());
+			System.out.println("User marks: " + data.getMarksList());
 		}
 		
 		return studentDataList;
@@ -71,6 +72,7 @@ public class GraderDaoImpl implements GraderDao {
 		studentData.setUserName(student.getUserName());
 		studentData.getProblems().add(student.getQuestionName());
 		studentData.getSubmissionDates().add(student.getLastModifiedDate());
+		studentData.getMarksList().add(student.getMarks());
 		return studentData;
 	}
 
@@ -80,6 +82,9 @@ public class GraderDaoImpl implements GraderDao {
 				where("homeworkName").is(homeworkName)
 				.and("questionName").is(questionName)
 				.and("userName").is(userName));
+		
+		
+		
 		Student result = mongoTemplate.findOne(query, Student.class);
 		GraderData data = setGraderData(result);
 		return data;
@@ -100,9 +105,14 @@ public class GraderDaoImpl implements GraderDao {
 	            .and("homeworkName").is(student.getHomeworkName())
 	            .and("questionName").is(student.getQuestionName()));
 		
-		Update update = new Update();
-		update.addToSet("marks", student.getMarks());
-		update.addToSet("feedback", student.getFeedback());
-		mongoTemplate.updateFirst(query, update, Homework.class);	
+		Student result =  mongoTemplate.findOne(query, Student.class);
+		result.setMarks(student.getMarks());
+		result.setFeedback(student.getFeedback());
+		Document doc = new Document(); // org.bson.Document
+		mongoTemplate.getConverter().write(result, doc);
+		Update update = Update.fromDocument(doc);
+		mongoTemplate.upsert(query, update, "student");
+		
 	}
+
 }

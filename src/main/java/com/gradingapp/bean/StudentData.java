@@ -11,6 +11,7 @@ public class StudentData {
 	private String userName;
 	private List<String> problems = new ArrayList<String>();
 	private List<String> submissionDates = new ArrayList<String>();
+	private List<Double> marksList = new ArrayList<Double>();
 	
 	public String getUserName() {
 		return userName;
@@ -31,5 +32,11 @@ public class StudentData {
 	}
 	public void setSubmissionDates(List<String> submissionDates) {
 		this.submissionDates = submissionDates;
+	}
+	public List<Double> getMarksList() {
+		return marksList;
+	}
+	public void setMarksList(List<Double> marksList) {
+		this.marksList = marksList;
 	}
 }

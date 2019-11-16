@@ -18,6 +18,8 @@ public class Student {
 	String lastModifiedDate;
 	double marks;
 	String feedback;
+	String codeFileURL;
+	String writeupURL;
 
 	public Student() {
 	}
@@ -47,7 +49,7 @@ public class Student {
 		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		this.lastModifiedDate = dateFormat.format(new Date());
 		this.result = result;
-		this.marks = 0;
+		this.marks = -1;
 		this.feedback = "";
 	}
 	
@@ -86,6 +88,18 @@ public class Student {
 	}
 	public void setFeedback(String feedback) {
 		this.feedback = feedback;
+	}
+	public String getCodeFileURL() {
+		return codeFileURL;
+	}
+	public void setCodeFileURL(String codeFileURL) {
+		this.codeFileURL = codeFileURL;
+	}
+	public String getWriteupURL() {
+		return writeupURL;
+	}
+	public void setWriteupURL(String writeupURL) {
+		this.writeupURL = writeupURL;
 	}
 
 }
