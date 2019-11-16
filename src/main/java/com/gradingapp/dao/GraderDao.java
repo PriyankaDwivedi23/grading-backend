@@ -12,5 +12,5 @@ public interface GraderDao {
 	
 	public GraderData getSubmissionFiles(String homeworkName, String questionName, String userName);
 	
-	public void submitGrades(GraderData data);
+	public void submitGrades(Student student);
 }

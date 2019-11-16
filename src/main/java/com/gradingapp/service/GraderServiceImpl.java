@@ -27,8 +27,8 @@ public class GraderServiceImpl implements GraderService {
 	}
 
 	@Override
-	public void submitGrades(GraderData data) {
-		graderDao.submitGrades(data);
+	public void submitGrades(Student student) {
+		graderDao.submitGrades(student);
 	}
 
 }
