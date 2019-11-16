@@ -3,14 +3,17 @@ package com.gradingapp.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.gradingapp.bean.GraderData;
+import com.gradingapp.bean.Homework;
 import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 
@@ -77,9 +80,6 @@ public class GraderDaoImpl implements GraderDao {
 				where("homeworkName").is(homeworkName)
 				.and("questionName").is(questionName)
 				.and("userName").is(userName));
-		
-		
-		
 		Student result = mongoTemplate.findOne(query, Student.class);
 		GraderData data = setGraderData(result);
 		return data;
@@ -94,9 +94,15 @@ public class GraderDaoImpl implements GraderDao {
 	}
 
 	@Override
-	public void submitGrades(GraderData data) {
-		// TODO Auto-generated method stub
+	public void submitGrades(Student student) {
+		Query query = new Query(Criteria 
+	            .where("userName").is(student.getUserName())
+	            .and("homeworkName").is(student.getHomeworkName())
+	            .and("questionName").is(student.getQuestionName()));
 		
+		Update update = new Update();
+		update.addToSet("marks", student.getMarks());
+		update.addToSet("feedback", student.getFeedback());
+		mongoTemplate.updateFirst(query, update, Homework.class);	
 	}
-
 }

@@ -55,9 +55,8 @@ public class GraderController {
 	
 	@CrossOrigin
 	@PostMapping(value = "/submitGrades")
-	public ResponseEntity<?> submitGrades(GraderData graderData) {
-		
-		
+	public ResponseEntity<?> submitGrades(Student student) {
+		graderService.submitGrades(student);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 }

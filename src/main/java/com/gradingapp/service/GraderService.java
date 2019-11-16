@@ -3,6 +3,7 @@ package com.gradingapp.service;
 import java.util.List;
 
 import com.gradingapp.bean.GraderData;
+import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 
 public interface GraderService {
@@ -11,6 +12,6 @@ public interface GraderService {
 	
 	public GraderData getSubmissionFiles(String homeworkName, String questionName, String userName);
 	
-	public void submitGrades(GraderData data);
+	public void submitGrades(Student student);
 
 }

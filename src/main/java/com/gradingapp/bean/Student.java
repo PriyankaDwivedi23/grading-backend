@@ -16,6 +16,8 @@ public class Student {
 	String questionName;
 	Result result;
 	String lastModifiedDate;
+	double marks;
+	String feedback;
 
 	public Student() {
 	}
@@ -45,6 +47,8 @@ public class Student {
 		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		this.lastModifiedDate = dateFormat.format(new Date());
 		this.result = result;
+		this.marks = 0;
+		this.feedback = "";
 	}
 	
 	public String getId() {
@@ -70,6 +74,18 @@ public class Student {
 	}
 	public void setQuestionName(String questionName) {
 		this.questionName = questionName;
+	}
+	public double getMarks() {
+		return marks;
+	}
+	public void setMarks(double marks) {
+		this.marks = marks;
+	}
+	public String getFeedback() {
+		return feedback;
+	}
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
 	}
 
 }

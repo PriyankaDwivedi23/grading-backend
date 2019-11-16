@@ -39,7 +39,7 @@ public class StudentController {
 			String studentCodePath = FileUtils.generatePath("Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
 			result = c.compileAndRun(studentCodePath, inputFilePath, outputFilePath);
 		}
-		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName() , studentHomework.getQuestionName(),result));
+		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName(), studentHomework.getQuestionName(), result));
 		
 		return new ResponseEntity(result, HttpStatus.OK);
 	}
