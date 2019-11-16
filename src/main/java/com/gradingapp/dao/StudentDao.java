@@ -3,6 +3,7 @@ package com.gradingapp.dao;
 import java.util.List;
 
 import com.gradingapp.bean.Student;
+import com.gradingapp.bean.Writeup;
 
 public interface StudentDao {
 	
@@ -18,7 +19,7 @@ public interface StudentDao {
  
     public List < Student > findAll();
     
-    public void updateWriteup(Student s);
+    public void updateWriteup(Writeup writeup);
 
 
 }

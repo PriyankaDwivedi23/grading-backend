@@ -48,17 +48,18 @@ public class FileController {
 	@RequestMapping(value="/download", method=RequestMethod.GET) 
 	public ResponseEntity<Object> downloadFile(@RequestParam("fileName") String filename) throws IOException  {
 		FileWriter filewriter =  null;
-		try {	
-		
-		File file = new File(filename);
-		
-		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("content-disposition", "inline;filename=" + filename);
-	    headers.setContentDispositionFormData(filename, filename);
-	    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-		ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("application/txt")).body(resource);
-		return responseEntity;
+		try {
+			File file = new File(filename);
+			
+			System.out.println("Filename: " + filename);
+			
+			InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("content-disposition", "inline;filename=" + filename);
+		    headers.setContentDispositionFormData(filename, filename);
+		    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+			ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("application/txt")).body(resource);
+			return responseEntity;
 		} catch (Exception e ) {
 			return new ResponseEntity<>("error occurred", HttpStatus.INTERNAL_SERVER_ERROR);	
 		} finally {

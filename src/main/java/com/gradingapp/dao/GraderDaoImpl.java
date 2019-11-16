@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.gradingapp.bean.GraderData;
 import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
+import com.gradingapp.bean.Writeup;
 
 @Repository
 @Qualifier("graderDao")
@@ -78,23 +79,28 @@ public class GraderDaoImpl implements GraderDao {
 
 	@Override
 	public GraderData getSubmissionFiles(String homeworkName, String questionName, String userName) {
-		Query query = new Query(Criteria.
+		Query query1 = new Query(Criteria.
 				where("homeworkName").is(homeworkName)
 				.and("questionName").is(questionName)
 				.and("userName").is(userName));
 		
+		Student result1 = mongoTemplate.findOne(query1, Student.class);
 		
+		Query query2 = new Query(Criteria.
+				where("homeworkName").is(homeworkName)
+				.and("userName").is(userName));
 		
-		Student result = mongoTemplate.findOne(query, Student.class);
-		GraderData data = setGraderData(result);
+		Writeup result2 = mongoTemplate.findOne(query2, Writeup.class);
+		
+		GraderData data = setGraderData(result1, result2);
 		return data;
 	}
 	
-	private GraderData setGraderData(Student student) {
+	private GraderData setGraderData(Student student, Writeup writeup) {
 		GraderData data = new GraderData();
-		data.setHomeworkFileName("Main.java");
-		data.setWriteupFileName("");
+		data.setHomeworkFileName(student.getCodeFileURL());
 		data.setResult(student.getResult());
+		data.setWriteupFileName(writeup.getWriteupURL());
 		return data;
 	}
 

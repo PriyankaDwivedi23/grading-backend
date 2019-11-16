@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gradingapp.bean.Student;
+import com.gradingapp.bean.Writeup;
 import com.gradingapp.dao.StudentDao;
 
 @Service("studentService")
@@ -46,8 +47,8 @@ public class StudentServiceImpl implements StudentService{
 	}
 
 	@Override
-	public void updateWriteup(Student s) {
-		studentDao.updateWriteup(s);
+	public void updateWriteup(Writeup writeup) {
+		studentDao.updateWriteup(writeup);
 		
 	}
 

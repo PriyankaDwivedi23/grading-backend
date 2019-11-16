@@ -19,10 +19,22 @@ public class Student {
 	double marks = -1.0;
 	String feedback = "";
 	String codeFileURL = "";
-	String writeupURL = "";
 
 	public Student() {
 	}
+	
+	public Student(String userName, String homeworkName, String questionName, Result result, String codeFileURL, String writeupURL) {
+		this.userName = userName;
+		this.homeworkName = homeworkName;
+		this.questionName = questionName;
+		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		this.lastModifiedDate = dateFormat.format(new Date());
+		this.result = result;
+		this.marks = -1.0;
+		this.feedback = "";
+		this.codeFileURL = codeFileURL;
+	}
+	
 	public String get_id() {
 		return _id;
 	}
@@ -41,18 +53,6 @@ public class Student {
 	public void setLastModifiedDate(String lastModifiedDate) {
 		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		this.lastModifiedDate = dateFormat.format(new Date());
-	}
-	public Student(String userName, String homeworkName, String questionName, Result result, String codeFileURL, String writeupURL) {
-		this.userName = userName;
-		this.homeworkName = homeworkName;
-		this.questionName = questionName;
-		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		this.lastModifiedDate = dateFormat.format(new Date());
-		this.result = result;
-		this.marks = -1.0;
-		this.feedback = "";
-		this.codeFileURL = codeFileURL;
-		this.writeupURL = writeupURL;
 	}
 	
 	public String getId() {
@@ -96,12 +96,6 @@ public class Student {
 	}
 	public void setCodeFileURL(String codeFileURL) {
 		this.codeFileURL = codeFileURL;
-	}
-	public String getWriteupURL() {
-		return writeupURL;
-	}
-	public void setWriteupURL(String writeupURL) {
-		this.writeupURL = writeupURL;
 	}
 
 }

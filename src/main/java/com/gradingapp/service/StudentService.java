@@ -3,6 +3,7 @@ package com.gradingapp.service;
 import java.util.List;
 
 import com.gradingapp.bean.Student;
+import com.gradingapp.bean.Writeup;
 
 
 public interface StudentService {
@@ -19,7 +20,6 @@ public interface StudentService {
  
     public List < Student > findAll();
     
-    public void updateWriteup(Student s);
-
+    public void updateWriteup(Writeup writeup);
 
 }

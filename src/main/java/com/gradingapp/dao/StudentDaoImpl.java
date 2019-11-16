@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.gradingapp.bean.Student;
+import com.gradingapp.bean.Writeup;
 
 
 @Repository
@@ -33,11 +34,6 @@ public class StudentDaoImpl implements StudentDao{
 	            .and("questionName").is(s.getQuestionName()));
 		
 		List<Student> students =  mongoTemplate.find(query, Student.class);
-		if(students.size() == 0) {
-			
-		}
-		
-		System.out.println("Size: " + students.size());
 		
 		for(Student student : students) {
 			student.setResult(s.getResult());
@@ -84,22 +80,8 @@ public class StudentDaoImpl implements StudentDao{
 	}
 
 	@Override
-	public void updateWriteup(Student s) {
-		Query query = new Query(Criteria 
-	            .where("userName").is(s.getUserName())
-	            .and("homeworkName").is(s.getHomeworkName()));
-	            	
-		List<Student> students =  mongoTemplate.find(query, Student.class);
-		for(Student student : students) {
-			student.setWriteupURL(s.getWriteupURL());
-			student.setLastModifiedDate(s.getLastModifiedDate());
-			Document doc = new Document(); // org.bson.Document
-			mongoTemplate.getConverter().write(student, doc);
-			Update update = Update.fromDocument(doc);
-			mongoTemplate.upsert(query, update, "student");
-		}
-		if(students.isEmpty()) {
-			mongoTemplate.save(s);
-		}
+	public void updateWriteup(Writeup writeup) {
+		mongoTemplate.insert(writeup);
+		
 	}
 }

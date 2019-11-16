@@ -35,7 +35,7 @@ public class FileUtils {
     		finalPath += "Professor" + delimiter  + homeworkName + delimiter + questionName + delimiter +  "outputFiles" + delimiter;
     		break;
     	case "Writeup" :
-    		finalPath += "Student" + delimiter + userName +delimiter + homeworkName + delimiter + "writeup" + delimiter;
+    		finalPath += "Student" + delimiter + userName + delimiter + homeworkName + delimiter + "writeup" + delimiter;
     		break;
     	}
     	return finalPath;

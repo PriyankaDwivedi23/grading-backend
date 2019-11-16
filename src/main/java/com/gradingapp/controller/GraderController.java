@@ -22,9 +22,6 @@ public class GraderController {
 	@Autowired
 	private GraderService graderService;
 	
-	@Autowired
-	private FileController fileController;
-	
 	@CrossOrigin
 	@GetMapping(value = "/getHomeworkSubmissions")
 	public ResponseEntity<?> getHomeworkSubmissions(@RequestParam("homeworkName") String homeworkName){
@@ -42,9 +39,6 @@ public class GraderController {
 		System.out.println("User name: "+ userName);
 		
 		GraderData graderData = graderService.getSubmissionFiles(homeworkName, questionName, userName);
-		
-//		ResponseEntity<Resource> resource = fileController.downloadFile(student.getHomeworkName(),
-//				student.getQuestionName(), student.getUserName());
 		
 		return new ResponseEntity<>(graderData, HttpStatus.OK);
 	}
