@@ -17,6 +17,8 @@ public interface StudentDao {
     public Student find(Student s);
  
     public List < Student > findAll();
+    
+    public void updateWriteup(Student s);
 
 
 }

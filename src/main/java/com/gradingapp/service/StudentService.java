@@ -18,6 +18,8 @@ public interface StudentService {
     public Student find(Student s);
  
     public List < Student > findAll();
+    
+    public void updateWriteup(Student s);
 
 
 }

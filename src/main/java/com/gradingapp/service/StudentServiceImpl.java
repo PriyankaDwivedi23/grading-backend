@@ -45,4 +45,10 @@ public class StudentServiceImpl implements StudentService{
 		return studentDao.findAll();
 	}
 
+	@Override
+	public void updateWriteup(Student s) {
+		studentDao.updateWriteup(s);
+		
+	}
+
 }

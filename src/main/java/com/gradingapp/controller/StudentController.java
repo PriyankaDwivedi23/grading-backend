@@ -30,16 +30,17 @@ public class StudentController {
 	@CrossOrigin
 	@PostMapping(value = "/submitHomework")
 	public ResponseEntity<?> submitHomework(MultipartFile sourceCode, Student studentHomework) {
+		String studentCodePath = "";
 		Result result = new Result();
 		System.out.println(studentHomework.getUserName()+ studentHomework.getHomeworkName() + studentHomework.getQuestionName());
 		if(sourceCode != null) {
 			fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
 			String inputFilePath = FileUtils.generatePath("Professor-Input", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"input.txt";
 			String outputFilePath = FileUtils.generatePath("Professor-Output", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"output.txt";
-			String studentCodePath = FileUtils.generatePath("Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
+			studentCodePath = FileUtils.generatePath("Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName()) + "Main.java";
 			result = c.compileAndRun(studentCodePath, inputFilePath, outputFilePath);
 		}
-		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName(), studentHomework.getQuestionName(), result));
+		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName(), studentHomework.getQuestionName(), result, studentCodePath, ""));
 		
 		return new ResponseEntity(result, HttpStatus.OK);
 	}
@@ -47,11 +48,15 @@ public class StudentController {
 	@CrossOrigin
 	@PostMapping(value = "/uploadWriteup")
 	public ResponseEntity uploadWriteup(MultipartFile writeupFile, Student student) {
+		System.out.println(student.getMarks());
+		String writeupPath = "";
 		if(null != writeupFile) {
+			writeupPath = FileUtils.generatePath("Writeup", student.getHomeworkName(), student.getQuestionName(), student.getUserName()) + writeupFile.getOriginalFilename();;
 			fileService.handleFileUpload(writeupFile, "Writeup", student.getHomeworkName(), "", student.getUserName());
+			student.setWriteupURL(writeupPath);
+			student.setMarks(-1.0);
+			studentService.updateWriteup(student);
 		}
 		return new ResponseEntity("Successfully uploaded!", HttpStatus.OK);
 	}
-	
- 
 }

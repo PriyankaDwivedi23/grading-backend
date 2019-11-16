@@ -2,7 +2,7 @@ package com.gradingapp.utils;
 
 public class FileUtils {
 	
-	private static final String folderPath = "/Users/bebo/Documents/grading-backend/src/main/resources/uploads/";
+	private static final String folderPath = "uploads/";
 	
 	public static String generateFileName(String Type) {
     	String fileName = "";
@@ -16,13 +16,14 @@ public class FileUtils {
     	case "Professor-Output":
     		fileName = "output.txt";
     		break;	
+    		
     	}
     	return fileName;
     }
     
     public static String generatePath(String Type , String homeworkName, String questionName, String userName) {
     	String finalPath = folderPath;
-    	String delimiter = "//";
+    	String delimiter = "/";
     	switch(Type) {
     	case "Student" :
     		finalPath += Type + delimiter + userName + delimiter + homeworkName + delimiter + questionName + delimiter;
@@ -34,7 +35,7 @@ public class FileUtils {
     		finalPath += "Professor" + delimiter  + homeworkName + delimiter + questionName + delimiter +  "outputFiles" + delimiter;
     		break;
     	case "Writeup" :
-    		finalPath += "Student" + delimiter + homeworkName + delimiter + "writeup" + delimiter;
+    		finalPath += "Student" + delimiter + userName +delimiter + homeworkName + delimiter + "writeup" + delimiter;
     		break;
     	}
     	return finalPath;

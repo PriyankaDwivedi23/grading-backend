@@ -16,10 +16,10 @@ public class Student {
 	String questionName;
 	Result result;
 	String lastModifiedDate;
-	double marks;
-	String feedback;
-	String codeFileURL;
-	String writeupURL;
+	double marks = -1.0;
+	String feedback = "";
+	String codeFileURL = "";
+	String writeupURL = "";
 
 	public Student() {
 	}
@@ -42,15 +42,17 @@ public class Student {
 		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		this.lastModifiedDate = dateFormat.format(new Date());
 	}
-	public Student(String userName, String homeworkName, String questionName, Result result) {
+	public Student(String userName, String homeworkName, String questionName, Result result, String codeFileURL, String writeupURL) {
 		this.userName = userName;
 		this.homeworkName = homeworkName;
 		this.questionName = questionName;
 		DateFormat dateFormat =  new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		this.lastModifiedDate = dateFormat.format(new Date());
 		this.result = result;
-		this.marks = -1;
+		this.marks = -1.0;
 		this.feedback = "";
+		this.codeFileURL = codeFileURL;
+		this.writeupURL = writeupURL;
 	}
 	
 	public String getId() {

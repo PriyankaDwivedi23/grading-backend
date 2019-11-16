@@ -22,7 +22,7 @@ import com.gradingapp.utils.FileUtils;
 @Service("fileService")
 public class FileServiceImpl implements FileService {
 	
-private static final String folderPath = "/Users/bebo/Documents/grading-backend/src/main/resources/uploads/";
+private static final String folderPath = "uploads/";
     
     public ResponseEntity<?> handleFileUpload(MultipartFile file, String Type , String homeworkName, String questionName, String userName) {
         try {
@@ -31,18 +31,20 @@ private static final String folderPath = "/Users/bebo/Documents/grading-backend/
         		directory.mkdirs();
         	}
         	
-        	String finalPath = directory + "//" + FileUtils.generateFileName(Type);
-        	
-			Path path = Paths.get(finalPath);
-
-        	try {
-        		Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        	} catch (IOException e) {
-        		e.printStackTrace();
+        	String finalPath = directory + "\\" ;
+        	if(Type.equals("Writeup")) {
+        		finalPath += file.getOriginalFilename();
+        	}else {
+        		finalPath +=  FileUtils.generateFileName(Type);
         	}
+        	System.out.println(finalPath);
         	
-        	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path(finalPath).toUriString();
-        	System.out.println("File Download Uri: " + fileDownloadUri);
+        	Path path = Paths.get(finalPath);
+        	
+        	Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        	
+//        	File fileToSave = new File(finalPath);
+//            file.transferTo(fileToSave);
 
         } catch (Exception ioe) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
