@@ -22,7 +22,7 @@ import com.gradingapp.utils.FileUtils;
 @Service("fileService")
 public class FileServiceImpl implements FileService {
 	
-private static final String folderPath = "uploads/";
+private static final String folderPath = "/Users/bebo/Documents/grading-backend/src/main/resources/uploads/";
     
     public ResponseEntity<?> handleFileUpload(MultipartFile file, String Type , String homeworkName, String questionName, String userName) {
         try {
@@ -79,7 +79,8 @@ private static final String folderPath = "uploads/";
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-		}
+		} 
+		
 		return null;
 	}
 

@@ -2,7 +2,7 @@ package com.gradingapp.utils;
 
 public class FileUtils {
 	
-	private static final String folderPath = "uploads/";
+	private static final String folderPath = "/Users/bebo/Documents/grading-backend/src/main/resources/uploads/";
 	
 	public static String generateFileName(String Type) {
     	String fileName = "";
