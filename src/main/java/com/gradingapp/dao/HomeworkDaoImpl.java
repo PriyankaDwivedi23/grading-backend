@@ -4,7 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,11 +28,15 @@ public class HomeworkDaoImpl implements HomeworkDao{
 
 	@Override
 	public void create(Homework h) {
-		String homeworkName = h.getHomeworkName();
-		String dueDate = h.getDueDate();
-		List<Problem> problems = new ArrayList<>();
-		h.setProblem(problems);
-		mongoTemplate.insert(h);
+		Query query = new Query(Criteria.where("homeworkName").is(h.getHomeworkName()));
+		Homework result = null;
+		result = mongoTemplate.findOne(query, Homework.class);
+		if(result == null) {
+			
+			List<Problem> problems = new ArrayList<>();
+			h.setProblem(problems);
+			mongoTemplate.insert(h);
+		}
 	}
 
 	@Override
@@ -64,8 +70,11 @@ public class HomeworkDaoImpl implements HomeworkDao{
 		
 		Query query = new Query(Criteria.where("dueDate").gte(date));
 		List<Homework> homeworks = mongoTemplate.find(query, Homework.class);
-		System.out.println("Homeworks count: " + homeworks.size());
-		return homeworks;
+		Set set = new HashSet(homeworks);
+		List<Homework> test = new ArrayList(set);
+		
+		System.out.println("Homeworks count: " + test.size());
+		return test;
 	}
 
 	@Override
@@ -84,6 +93,7 @@ public class HomeworkDaoImpl implements HomeworkDao{
 		System.out.println("Homework: " + result);
 		if(null != result) {
 			problems = result.getProblem();
+			
 			System.out.println("Problems count: " + problems.size());
 		}
 		return problems;

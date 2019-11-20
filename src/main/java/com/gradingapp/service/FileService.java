@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileService {
 	
-	private static final String folderPath = "uploads/";
+	private static final String folderPath = "/Users/bebo/Documents/grading-backend/src/main/resources/uploads/";
 	
 	public static String generateFileName(String Type) {
     	String fileName = "";
@@ -62,7 +62,7 @@ public class FileService {
 	        		directory.mkdirs();
 	        	}
 	        	
-	        	String finalPath = directory + "\\" ;
+	        	String finalPath = directory + "/" ;
 	        	if(Type.equals("Writeup")) {
 	        		finalPath += file.getOriginalFilename();
 	        	}else {
