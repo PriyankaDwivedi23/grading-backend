@@ -1,13 +1,22 @@
 package com.gradingapp.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,5 +58,28 @@ public class GraderController {
 		System.out.println("Inside grader");
 		graderService.submitGrades(student);
 		return new ResponseEntity<>("Successfully uploaded!", HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/download", method=RequestMethod.GET) 
+	public ResponseEntity<Object> downloadFile(@RequestParam("fileName") String filename) throws IOException  {
+		FileWriter filewriter =  null;
+		try {
+			File file = new File(filename);
+			
+			System.out.println("Filename: " + filename);
+			
+			InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("content-disposition", "inline;filename=" + filename);
+		    headers.setContentDispositionFormData(filename, filename);
+		    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+			ResponseEntity<Object> responseEntity = ResponseEntity.ok().headers(headers).contentLength(file.length()).contentType(MediaType.parseMediaType("application/txt")).body(resource);
+			return responseEntity;
+		} catch (Exception e ) {
+			return new ResponseEntity<>("error occurred", HttpStatus.INTERNAL_SERVER_ERROR);	
+		} finally {
+			if(filewriter!=null)
+				filewriter.close();
+		}
 	}
 }

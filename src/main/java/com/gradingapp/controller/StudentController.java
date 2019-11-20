@@ -14,7 +14,6 @@ import com.gradingapp.bean.Writeup;
 import com.gradingapp.service.CompileAndRunService;
 import com.gradingapp.service.FileService;
 import com.gradingapp.service.StudentService;
-import com.gradingapp.utils.FileUtils;
 
 @CrossOrigin("*")
 @RestController
@@ -36,9 +35,9 @@ public class StudentController {
 		System.out.println(studentHomework.getUserName()+ studentHomework.getHomeworkName() + studentHomework.getQuestionName());
 		if(sourceCode != null) {
 			fileService.handleFileUpload(sourceCode, "Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName());
-			String inputFilePath = FileUtils.generatePath("Professor-Input", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"input.txt";
-			String outputFilePath = FileUtils.generatePath("Professor-Output", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"output.txt";
-			studentCodePath = FileUtils.generatePath("Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName()) + "Main.java";
+			String inputFilePath = fileService.generatePath("Professor-Input", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"input.txt";
+			String outputFilePath = fileService.generatePath("Professor-Output", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), "") +"output.txt";
+			studentCodePath = fileService.generatePath("Student", studentHomework.getHomeworkName(), studentHomework.getQuestionName(), studentHomework.getUserName()) + "Main.java";
 			result = c.compileAndRun(studentCodePath, inputFilePath, outputFilePath);
 		}
 		studentService.create(new Student(studentHomework.getUserName(), studentHomework.getHomeworkName(), studentHomework.getQuestionName(), result, studentCodePath, ""));
@@ -51,7 +50,7 @@ public class StudentController {
 	public ResponseEntity<?> uploadWriteup(MultipartFile writeupFile, Writeup writeup) {
 		String writeupPath = "";
 		if(null != writeupFile) {
-			writeupPath = FileUtils.generatePath("Writeup", writeup.getHomeworkName(), "", writeup.getUserName()) + writeupFile.getOriginalFilename();;
+			writeupPath = fileService.generatePath("Writeup", writeup.getHomeworkName(), "", writeup.getUserName()) + writeupFile.getOriginalFilename();;
 			fileService.handleFileUpload(writeupFile, "Writeup", writeup.getHomeworkName(), "", writeup.getUserName());
 			writeup.setWriteupURL(writeupPath);
 			studentService.updateWriteup(writeup);
