@@ -25,6 +25,7 @@ import com.gradingapp.bean.Student;
 import com.gradingapp.bean.StudentData;
 import com.gradingapp.service.GraderService;
 
+@CrossOrigin("*")
 @RestController
 public class GraderController {
 	
