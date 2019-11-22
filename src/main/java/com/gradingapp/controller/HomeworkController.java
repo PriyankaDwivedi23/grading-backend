@@ -1,6 +1,7 @@
 package com.gradingapp.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,8 @@ public class HomeworkController {
     	for(Homework homework: homeworks) {
     		homeworkNames.add(homework.getHomeworkName());
     	}
+    	
+    	Collections.sort(homeworkNames);
     	System.out.println("Homeworknames list: " + homeworkNames);
     	
     	return new ResponseEntity<>(homeworkNames, HttpStatus.OK);
@@ -75,6 +78,8 @@ public class HomeworkController {
     	for(Problem problem: problems) {
     		problemNames.add(problem.getProblemName());
     	}
+    	
+    	Collections.sort(problemNames);
     	return new ResponseEntity<>(problemNames, HttpStatus.OK);
     }
     
@@ -86,6 +91,8 @@ public class HomeworkController {
     	for(Homework homework: homeworks) {
     		homeworkNames.add(homework.getHomeworkName());
     	}
+    	
+    	Collections.sort(homeworkNames);
     	System.out.println("Homeworknames list: " + homeworkNames);
     	return new ResponseEntity<>(homeworkNames, HttpStatus.OK);
     }
