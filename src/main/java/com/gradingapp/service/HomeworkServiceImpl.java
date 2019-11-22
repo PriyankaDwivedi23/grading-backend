@@ -16,8 +16,8 @@ public class HomeworkServiceImpl implements HomeworkService{
 	HomeworkDao homeworkDao;
 
 	@Override
-	public void create(Homework h) {
-		homeworkDao.create(h);
+	public boolean create(Homework h) {
+		return homeworkDao.create(h);
 	}
 
 	@Override

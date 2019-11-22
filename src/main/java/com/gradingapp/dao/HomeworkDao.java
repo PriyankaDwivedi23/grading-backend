@@ -7,7 +7,7 @@ import com.gradingapp.bean.Problem;
 
 public interface HomeworkDao {
 	
-	public void create(Homework h);
+	public boolean create(Homework h);
 	 
     public void update(Homework h);
     

@@ -37,8 +37,12 @@ public class HomeworkController {
     @CrossOrigin
 	@PostMapping(value = "/create" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> create(@ModelAttribute Homework homework) {       
-		homeworkService.create(homework);
-		return new ResponseEntity<>("Successfully uploaded!", HttpStatus.OK);
+		boolean isHWExist = homeworkService.create(homework);
+		if(isHWExist) {
+			return new ResponseEntity<>("Homework already exists!", HttpStatus.CONFLICT);
+		}else {
+			return new ResponseEntity<>("Successfully uploaded!", HttpStatus.OK);
+		}
 	}
     
     @CrossOrigin

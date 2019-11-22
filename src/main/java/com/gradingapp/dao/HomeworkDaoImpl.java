@@ -27,16 +27,19 @@ public class HomeworkDaoImpl implements HomeworkDao{
     MongoTemplate mongoTemplate;
 
 	@Override
-	public void create(Homework h) {
+	public boolean create(Homework h) {
+		boolean isHWExist = false;
 		Query query = new Query(Criteria.where("homeworkName").is(h.getHomeworkName()));
 		Homework result = null;
 		result = mongoTemplate.findOne(query, Homework.class);
 		if(result == null) {
-			
 			List<Problem> problems = new ArrayList<>();
 			h.setProblem(problems);
 			mongoTemplate.insert(h);
+		}else {
+			isHWExist = true;
 		}
+		return isHWExist;
 	}
 
 	@Override
