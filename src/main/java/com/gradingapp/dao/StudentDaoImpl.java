@@ -81,7 +81,20 @@ public class StudentDaoImpl implements StudentDao{
 
 	@Override
 	public void updateWriteup(Writeup writeup) {
-		mongoTemplate.insert(writeup);
+		Query query = new Query(Criteria 
+	            .where("userName").is(writeup.getUserName())
+	            .and("homeworkName").is(writeup.getHomeworkName()));
 		
+		Writeup result =  mongoTemplate.findOne(query, Writeup.class);
+		
+		if(result == null ) {
+			mongoTemplate.save(writeup);
+		}else {
+			result.setWriteupURL(writeup.getWriteupURL());
+			Document doc = new Document(); // org.bson.Document
+			mongoTemplate.getConverter().write(result, doc);
+			Update update = Update.fromDocument(doc);
+			mongoTemplate.upsert(query, update, "writeup");
+		}
 	}
 }

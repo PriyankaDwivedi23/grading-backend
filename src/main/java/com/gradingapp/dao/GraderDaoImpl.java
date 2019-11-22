@@ -100,7 +100,11 @@ public class GraderDaoImpl implements GraderDao {
 		GraderData data = new GraderData();
 		data.setHomeworkFileName(student.getCodeFileURL());
 		data.setResult(student.getResult());
-		data.setWriteupFileName(writeup.getWriteupURL());
+		if(writeup == null) {
+			data.setWriteupFileName("");
+		}else {
+			data.setWriteupFileName(writeup.getWriteupURL());
+		}
 		return data;
 	}
 
@@ -118,7 +122,5 @@ public class GraderDaoImpl implements GraderDao {
 		mongoTemplate.getConverter().write(result, doc);
 		Update update = Update.fromDocument(doc);
 		mongoTemplate.upsert(query, update, "student");
-		
 	}
-
 }
